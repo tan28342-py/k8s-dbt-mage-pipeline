@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mage-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: mage
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 6789

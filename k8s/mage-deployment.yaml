@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage-deployment
+  labels:
+    app: mage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mage
+  template:
+    metadata:
+      labels:
+        app: mage
+    spec:
+      containers:
+      - name: mageai
+        image: mage-custom:0.9.80-v1
+        command: ["mage", "start", "mage_project"]
+        ports:
+        - containerPort: 6789
+        env:
+        - name: DEFAULT_OWNER_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: mage-secrets      # Must match the metadata.name of Secret
+              key: MAGE_OWNER_EMAIL   # must match the key inside stringData
+        - name: DEFAULT_OWNER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mage-secrets      # Must match the metadata.name of Secret
+              key: MAGE_OWNER_PASSWORD # Must matchs the key inside stringData
+        - name: REQUIRE_USER_AUTHENTICATION
+          value: "1"
+        # --- mount the volume to /home/src ---
+        volumeMounts:
+        - name: mage-storage
+          mountPath: /home/src
+         # ------------------------
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi" 
+            cpu: "800m"    
+      volumes:  #define the volume linked to  PVC
+      - name: mage-storage
+        persistentVolumeClaim:
+          claimName: mage-pvc  # need to match the metadata.name of PersistentVolumeClaim   
+        
