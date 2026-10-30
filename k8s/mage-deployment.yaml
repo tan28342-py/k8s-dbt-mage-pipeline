@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: mageai
-        image: mage-custom:0.9.80-v1
+        image: tan28342/mage-custom:0.9.80-v1.1
+        imagePullPolicy: IfNotPresent
         command: ["mage", "start", "mage_project"]
         ports:
         - containerPort: 6789
@@ -39,12 +40,12 @@ spec:
           mountPath: /home/src
          # ------------------------
         resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "1024Mi" 
-            cpu: "800m"    
+          requests:  ##soft limit per individual pod
+            memory: "3000Mi"
+            cpu: "500m"
+          limits:   ##hard ceiling per individual pod
+            memory: "3500Mi" 
+            cpu: "1500m"    
       volumes:  #define the volume linked to  PVC
       - name: mage-storage
         persistentVolumeClaim:

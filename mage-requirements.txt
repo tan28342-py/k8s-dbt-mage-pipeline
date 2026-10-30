@@ -1,0 +1,8 @@
+kaggle
+google-cloud-bigquery
+google-cloud-bigquery-storage
+requests
+datetime
+openpyxl
+pyarrow
+pandas-gbq

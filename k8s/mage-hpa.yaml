@@ -1,3 +1,15 @@
+## kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml  
+##not work for this case need to skip TLS verification, instead: 
+
+# kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
+#   {
+#     "op": "add",
+#     "path": "/spec/template/spec/containers/0/args/-",
+#     "value": "--kubelet-insecure-tls"
+#   }
+# ]'
+
+
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -15,4 +27,10 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 50  # Scales up if average CPU crosses 50% of the requested 250m
+        averageUtilization: 85  # Scales up if average CPU crosses 80% of the requested
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 85
