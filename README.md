@@ -36,7 +36,7 @@ An end-to-end modern ELT data engineering platform simulating a talent acquisiti
 
 ### Credentials and Connection Setup
 * Configure Kaggle API token
-* Set up GCP Service Account (`data-worker`)
+* Set up GCP Service Account for BigQuery data ingestion and retrival 
 * Configure dbt connection profile
 
 ### ELT Pipeline Setup with Mage
