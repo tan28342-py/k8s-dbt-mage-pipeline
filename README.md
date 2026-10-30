@@ -21,24 +21,33 @@ An end-to-end modern ELT data engineering platform simulating a talent acquisiti
 
 ---
 
-## 🏗️ Architecture Overview
+## Data Source & References
+* **Dataset:** [Talent Recruitment & Job Matching Dataset](https://www.kaggle.com/datasets/colabsss/talent-recruitment-dataset)
+* **Orchestration Tool:** [Mage-ai Repository](https://github.com/mage-ai/mage-ai)
 
-```mermaid
-flowchart LR
-    subgraph Ingestion ["1. Data Ingestion"]
-        K[Kaggle API] -->|Raw CSVs| M[Mage.ai Pipeline]
-    end
+---
 
-    subgraph K8s ["2. Orchestration Layer (Local Kubernetes)"]
-        direction TB
-        M --> D[Custom Mage Docker Image]
-        D --> PVC[(Persistent Volume Claim)]
-        MS[Metrics Server] -.->|Monitor Load| HPA[Horizontal Pod Autoscaler]
-        HPA -.->|Scale Pods| D
-    end
+### Self-Hosting Mage.ai Locally with Kubernetes
+* Set up Kubernetes file structure
+* Build custom Mage Docker image with `mage-requirements.txt`
+* Install `metrics-server` to monitor pod resource usage
+* Set up Horizontal Pod Autoscaling (HPA) to increase infrastructure durability
+* Configure Persistent Volume Claim (PVC) for storage
 
-    subgraph Warehouse ["3. Storage & Transformation (Google Cloud)"]
-        M -->|Load Raw Data| BQR[(BigQuery: Raw Dataset)]
-        BQR -->|In-Warehouse Transformation| DBT[dbt Models]
-        DBT --> BQB[(BigQuery: Analytics / Base Tables)]
-    end
+### Credentials and Connection Setup
+* Configure Kaggle API token
+* Set up GCP Service Account (`data-worker`)
+* Configure dbt connection profile
+
+### ELT Pipeline
+* Call Kaggle API to extract dataset
+* Load raw data into BigQuery raw table
+* Transform and normalize raw data into base tables using dbt
+
+
+k8s/
+├─ mage-deployment.yaml
+├─ mage-hpa.yaml
+├─ mage-pvc.yaml
+├─ mage-service.yaml
+└─ secrets.yaml
