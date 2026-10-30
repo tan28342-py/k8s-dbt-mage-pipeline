@@ -41,5 +41,5 @@ An end-to-end modern ELT data engineering platform simulating a talent acquisiti
 
 ### ELT Pipeline Setup with Mage
 * Call Kaggle API to extract dataset
-* Load raw data into BigQuery raw table
+* Ingest raw data into BigQuery raw table
 * Transform and normalize raw data into base tables using dbt
