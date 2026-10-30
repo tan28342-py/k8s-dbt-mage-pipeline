@@ -6,3 +6,6 @@ datetime
 openpyxl
 pyarrow
 pandas-gbq
+google-auth
+google-auth-oauthlib  #handling user-based OAuth browser flows/tokens
+google-api-python-client # interacting with Google APIs like Sheets, BigQuery, Drive

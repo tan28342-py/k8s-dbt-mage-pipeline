@@ -1,0 +1,26 @@
+# 1. Project Information
+name: 'my_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+# 2. Link to your connection profile
+# CRITICAL: This name MUST match the top-level name in your profiles.yml!
+profile: 'my_dbt_project'
+
+# 3. Directory layout (where dbt finds your files)
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# 4. Model Configurations
+models:
+  my_dbt_project:
+    # Default materialization: create actual tables in BigQuery
+    +materialized: table

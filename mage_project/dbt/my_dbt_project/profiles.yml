@@ -1,0 +1,12 @@
+my_dbt_project:             # <--- !!!!!!!!!!!MUST BE THE EXACT SAME NAME!
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: data-pipeline-poc-513121 
+      dataset: base
+      keyfile: /home/src/mage_project/data-pipeline-poc-513121-4aecb4bf52d6.json
+      location: US
+      threads: 4
+      timeout_seconds: 300

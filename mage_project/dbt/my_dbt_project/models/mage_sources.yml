@@ -1,0 +1,14 @@
+sources:
+- description: Dataframes Mage upstream blocks
+  loader: mage
+  name: mage_my_dbt_project
+  schema: base
+  tables:
+  - description: Dataframe for block `raw_data_exporter` of the `kaggle_recruitment_to_bq`
+      mage pipeline.
+    identifier: mage_kaggle_recruitment_to_bq_raw_data_exporter
+    meta:
+      block_uuid: raw_data_exporter
+      pipeline_uuid: kaggle_recruitment_to_bq
+    name: kaggle_recruitment_to_bq_raw_data_exporter
+version: 2

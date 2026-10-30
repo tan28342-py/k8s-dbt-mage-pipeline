@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: data-pipeline-poc-513121       # gcp project id
+    schema: raw                 # bq dataset name
+    tables: 
+      - name: raw_kaggle_talent_recruitment       # bq table name
+        description: "Raw ingested Kaggle dataset uploaded from CSV/Excel"
