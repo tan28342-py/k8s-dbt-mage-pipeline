@@ -1,4 +1,5 @@
 .env
-note.txtmage_project/io_config.yaml
 note.txt
-.env
+*.json
+/mage_project/*.json
+/mage_project/io_config.yaml
