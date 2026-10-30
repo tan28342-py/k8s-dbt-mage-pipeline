@@ -39,15 +39,7 @@ An end-to-end modern ELT data engineering platform simulating a talent acquisiti
 * Set up GCP Service Account (`data-worker`)
 * Configure dbt connection profile
 
-### ELT Pipeline
+### ELT Pipeline Setup with Mage
 * Call Kaggle API to extract dataset
 * Load raw data into BigQuery raw table
 * Transform and normalize raw data into base tables using dbt
-
-
-k8s/
-├─ mage-deployment.yaml
-├─ mage-hpa.yaml
-├─ mage-pvc.yaml
-├─ mage-service.yaml
-└─ secrets.yaml
